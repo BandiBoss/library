@@ -11,12 +11,13 @@ class BooksController < ApplicationController
   end
 
   def show
-
+    @author = Author.find_by(id: @book.author_id).title
   end
 
   def new
     @book = current_user.books.build
     @categories = Category.all.map{ |c| [c.name, c.id] }
+    @authors = Author.all.map{ |c| [c.title, c.id] }
   end
 
   def create
@@ -26,7 +27,7 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to root_path
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -40,13 +41,13 @@ class BooksController < ApplicationController
     if @book.update(book_params)
       redirect_to book_path(@book)
     else
-      render 'edit'
+      render :edit
     end
   end
 
   def destroy
     @book.destroy
-    redirect_to root_path
+    redirect_to book_path(@book)
   end
 
   private

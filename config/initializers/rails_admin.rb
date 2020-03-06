@@ -6,6 +6,23 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Book' do
+    create do
+      field "title"
+      field :description
+      field :author
+      field :created_at
+      field :updated_at
+      field :user_id
+      field :category_id
+      field :book_img_file_name
+      field :book_img_content_type
+      field :book_img_file_size
+      field :book_img_updated_at
+      field :author_ids
+    end
+  end
+
   ### Popular gems integration
 
   ## == Devise ==
